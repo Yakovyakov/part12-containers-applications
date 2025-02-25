@@ -19,5 +19,5 @@ To show what exactly happened in the terminal during each exercise run the follo
 
 ```bash
 # Exercise 12.3
-scriptreplay -t script-answers/exercise12.3_timing.txt script-answers/exercise12.3.txt -m 0.2
+scriptreplay script-answers/exercise12.3_timing.txt script-answers/exercise12.3.txt -m 0.2
 ```
