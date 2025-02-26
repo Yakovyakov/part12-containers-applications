@@ -62,7 +62,7 @@ typings/
 
 # Dockerfile.local
 
-Dockerfile.local
+Dockerfile.local*
 
 # docker-compose.local.yml
 
