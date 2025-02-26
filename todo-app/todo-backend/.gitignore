@@ -59,3 +59,12 @@ typings/
 
 # next.js build output
 .next
+
+# Dockerfile.local
+
+Dockerfile.local
+
+# docker-compose.local.yml
+
+docker-compose.local.yml
+
