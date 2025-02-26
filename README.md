@@ -6,14 +6,14 @@
 
 3. Basics of Orchestration
 
-## About exercises 12.1 to 12.4
+## About exercises with command script
 
 The answers are inside the folder script-answers </br>
-Each exercise from 12.2 to 12.4 has 3 files:
+Each exercise executed with the script command has 3 files:
 
-- exercise12_[2-4].txt: contains the output of the script command
-- exercise12_[2-4]_timing.txt: time file of the output of the script command
-- exercise12_[2-4]_only_cmd.txt: contains only the executed commands
+- exercise12_[exercise_number].txt: contains the output of the script command
+- exercise12_[exercise_number]_timing.txt: time file of the output of the script command
+- exercise12_[exercise_number]_only_cmd.txt: contains only the executed commands
 
 To show what exactly happened in the terminal during each exercise run the following command
 
