@@ -17,4 +17,5 @@ dist
 # Ignore Docker-related files
 Dockerfile*
 docker-compose*
+dev.Dockerfile*
 .dockerignore
