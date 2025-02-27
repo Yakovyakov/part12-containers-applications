@@ -1,0 +1,40 @@
+docker exec -it redis_server bash
+redis-cli
+KEYS *
+GET todos_added
+SET todos_added 9001
+GET todos_added
+# Exit from redis-cli
+exit
+# Exit from docker container
+exit
+# Get statistics page
+curl -X GET -H "Content-Type: application/json" http://localhost:3000/statistics;echo
+# Add a new value
+curl -X POST -d '{"text":"a new value", "done": "false" }' -H "Content-Type: application/json" http://localhost:3000/todos;echo
+# Get statistics page
+curl -X GET -H "Content-Type: application/json" http://localhost:3000/statistics;echo
+docker exec -it redis_server bash
+redis-cli
+GET todos_added
+DEL todos_added
+KEYS *
+# Exit from redis-cli
+exit
+# Exit from docker container
+exit
+# Get statistics page
+curl -X GET -H "Content-Type: application/json" http://localhost:3000/statistics;echo
+# Add a new value
+curl -X POST -d '{"text":"a new value 1", "done": "false" }' -H "Content-Type: application/json" http://localhost:3000/todos;echo
+# Get statistics page
+curl -X GET -H "Content-Type: application/json" http://localhost:3000/statistics;echo
+# Add another value
+curl -X POST -d '{"text":"a new value 2", "done": "false" }' -H "Content-Type: application/json" http://localhost:3000/todos;echo
+# Get statistics page
+curl -X GET -H "Content-Type: application/json" http://localhost:3000/statistics;echo
+# Add another value
+curl -X POST -d '{"text":"a new value 3", "done": "false" }' -H "Content-Type: application/json" http://localhost:3000/todos;echo
+# Get statistics page
+curl -X GET -H "Content-Type: application/json" http://localhost:3000/statistics;echo
+exit
