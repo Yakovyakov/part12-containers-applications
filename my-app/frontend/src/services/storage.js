@@ -1,4 +1,4 @@
-const KEY = 'bloglist-user-token'
+const KEY = 'library-user-token'
 
 const saveToken = (user) => {
   localStorage.setItem(KEY, JSON.stringify(user))

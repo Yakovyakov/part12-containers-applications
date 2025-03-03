@@ -81,4 +81,22 @@ export default [
   { 
     ignores: ["dist/**", "build/**"],
   },
+  {
+    "overrides": [
+      {
+        "files": ["mongo-init.js"],
+        "env": {
+          "node": false,
+          "mongo": TransformStreamDefaultController
+        },
+        "globals": {
+          "db": "readonly",
+          "print": "readonly"
+        },
+        "rules": {
+          "no-undef": "off"
+        }
+      }
+    ]
+  }
 ];
