@@ -80,7 +80,8 @@ const initialUsers = [
   }
   
 ]
-
+const adminDb = db.getSiblingDB('admin');
+adminDb.auth('root', 'example');
 /* select bd or create */
 db = db.getSiblingDB('library_database');
 db.createUser({
@@ -93,6 +94,7 @@ db.createUser({
     },
   ],
 });
+
 
 db.createCollection('users');
 db.createCollection('books');
