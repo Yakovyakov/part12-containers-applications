@@ -1,27 +1,27 @@
 services:
   app:
-    image: todo-front-dev
-    volumes:
-      - ./todo-frontend:/usr/src/app 
-    container_name: todo-front-dev 
+    image: todo-frontend
+    container_name: todo-frontend 
+    build: 
+      context: ./todo-frontend
+      dockerfile: Dockerfile
     environment:
+      # In production we must change the value of the url to the public url relative to the reverse proxy
       VITE_BACKEND_URL: http://localhost:8080/api
     networks:
       - private_proxy_network  # private network (proxy --> app, server)
   server:
-    image: todo-backend-dev
-    volumes:
-      - ./todo-backend:/usr/src/app
-    container_name: todo-backend-dev
+    image: todo-backend
+    container_name: todo-backend
     environment:
-      MONGO_URL: mongodb://the_username:the_password@mongo_server:27017/the_database
+      MONGO_URL: mongodb://the_username:the_password@mongodb_server:27017/the_database
       REDIS_URL: redis://redis_server:6379
     networks:
       - private_proxy_network  # private network (proxy --> app, server)
       - private_server_network  # private network (server -->redis_server, mongo_server)
   mongo:
-    image: initialized-mongo
-    container_name: mongo_server
+    image: mongo
+    container_name: mongodb_server
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
@@ -41,7 +41,7 @@ services:
   nginx:
     image: nginx:1.20.1
     volumes:
-      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 8080:80
     container_name: reverse-proxy

@@ -6,7 +6,8 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-ENV VITE_BACKEND_URL="http://localhost:3000"
+# In production we must change the value of the url to the public url relative to the reverse proxy
+ENV VITE_BACKEND_URL="http://localhost:8080/api"
 
 RUN npm ci
 
