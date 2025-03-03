@@ -30,12 +30,12 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000',
+  uri: import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000',
 })
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: 'ws://localhost:4000',
+    url: import.meta.env.VITE_BACKEND_WS || 'ws://localhost:4000/subscriptions',
   })
 )
 
