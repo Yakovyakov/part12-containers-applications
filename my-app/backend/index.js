@@ -40,7 +40,7 @@ const start = async () => {
 
   const wsServer = new WebSocketServer({
     server: httpServer,
-    path: '/',
+    path: '/subscriptions',
   })
 
   const schema = makeExecutableSchema({ typeDefs, resolvers })
