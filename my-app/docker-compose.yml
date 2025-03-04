@@ -1,0 +1,61 @@
+services:
+  app:
+    image: my-app
+    container_name: my-app
+    environment:
+      # In production we must change the value of the url to the public url relative to the reverse proxy
+      # have to change localhost value to the public url relative to the reverse proxy
+      VITE_BACKEND_URL: http://localhost:8080/graphql
+      VITE_BACKEND_WS: http://localhost:8080/subscriptions
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    networks:
+      - private_proxy_network  # private network (proxy --> app, server)
+  server:
+    image: my-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: my-backend
+    environment:
+      MONGODB_URI: mongodb://the_username:the_password@mongo_server:27017/library_database
+      JWT_SECRET: SECRET
+    networks:
+      - private_proxy_network  # private network (proxy --> app, server)
+      - private_server_network  # private network (server --> mongo_server)
+  mongo:
+    image: mongo
+    container_name: mongo_server
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: library_database
+    volumes:
+      - ./backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - mongo_data:/data/db
+    networks:
+      - private_server_network  # private network (server --> mongo_server)
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - app
+      - server
+    networks:
+      - private_proxy_network  # private network (proxy --> app, server)
+      - public_network  # private network (server --> mongo_server)
+networks:
+  public_network:
+    # External Network
+  private_proxy_network:
+    internal: true  # Private [ proxy ---> app, server ]Network
+  private_server_network:
+    internal: true  # Private [ server --->  mongo_server ] Network
+volumes:
+  mongo_data:
+
