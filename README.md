@@ -28,3 +28,41 @@ To dump the result of the exercise on the screen, execute:
 # Exercise 12.3
 scriptreplay script-answers/exercise12.3_timing.txt script-answers/exercise12.3.txt -m 0
 ```
+
+## my-app: My own full stack app 'Library-app'
+
+### app structure
+
+```tree
+└── my-app
+    ├── frontend
+    |    ├── dev.Dockerfile
+    |    └── Dockerfile
+    ├── backend
+    |    └── dev.Dockerfile
+    |    └── Dockerfile
+    ├── nginx.dev.conf
+    ├── nginx.conf
+    ├── docker-compose.dev.yml
+    └── docker-compose.yml
+```
+
+### backend
+
+#### Install backend
+
+```bash
+cd backend
+npm ci
+```
+
+### frontend
+
+### Install frontend
+
+```bash
+cd frontend
+npm ci
+```
+
+**Note:** Initial users are "root", "hellas" and "mluukkai" all have the password "secret".
